@@ -63,27 +63,143 @@ namespace ISTA322_Exercise8C_Roulette
                 column = "2nd";
             }
 
-            string street = "0/00";
-            int i = number % 3;
-            if (i == 0)
+            string street = "";
+            int remainder = number % 3;
+            if (number == 0 || number == 37)
+            {
+                street = $"{winningBin}";
+            }
+            else if (remainder == 0)
             { 
                 street = $"{number - 2}/{number - 1}/{number}";
             }
-            else if (i == 1 && i !=37)
+            else if (remainder == 1 && remainder !=37)
             {
                 street = $"{number}/{number + 1}/{number + 2}";
             }
-            else if (i == 2)
+            else if (remainder == 2)
             {
                 street = $"{number - 1}/{number}/{number + 1}";
             }
 
-            string sixNumbers = "1/2/3/4/5/6";
+            string sixNumbers;
+            if (number == 0 || number == 37)
+            {
+                sixNumbers = $"{winningBin}";
+            }
+            else if (number == 34)
+            {
+                sixNumbers = "31/32/33/34/35/36";
+            }
+            else if (remainder == 0 && (number != 1 || number != 34))
+            {
+                sixNumbers = $"{number - 5}/{number - 4}/{number - 3}/{number - 2}/{number - 1}/{number}, {number - 2}/{number - 1}/{number}/{number + 1}/{number + 2}/{number + 3}";
+            }
+            else if (remainder == 1 && number != 37)
+            {
+                sixNumbers = $"{number - 3}/{number - 2}/{number - 1}/{number}/{number + 1}/{number + 2}, {number}/{number + 1}/{number + 2}/{number + 3}/{number + 4}/{number + 5}";
+            }
+            else
+            {
+                sixNumbers = $"{number - 4}/{number - 3}/{number - 2}/{number - 1}/{number}/{number + 1}, {number - 1}/{number}/{number + 1}/{number + 2}/{number + 3}/{number + 4}";
+            }
 
-            string split = "1/2";
+            string split = "";
+            if (number == 0 || number == 37)
+            {
+                split = $"{winningBin}";
+            }
+            else if (number < 4)
+            {
+                if (remainder == 0)
+                {
+                    split = $"{number - 1}/{number}, {number}/{number + 3}";
+                }
+                else if (remainder == 1 && number != 37)
+                {
+                    split = $"{number}/{number + 1}, {number}/{number + 3}";
+                }
+                else
+                {
+                    split = $"{number - 1}/{number}, {number}/{number + 1}, {number}/{number + 3}";
+                }
+            }
+            else if (number > 33)
+            {
+                if (remainder == 0)
+                {
+                    split = $"{number - 3}/{number}, {number - 1}/{number}";
+                }
+                else if (remainder == 1 && number != 37)
+                {
+                    split = $"{number -3}/{number}, {number}/{number + 1}";
+                }
+                else
+                {
+                    split = $"{number - 3}/{number}, {number -1}/{number}, {number}/{number + 1}";
+                }
+            }
+            else if (remainder == 0)
+            {
+                split = $"{number - 3}/{number}, {number - 1}/{number}, {number}/{number + 3}";
+            }
+            else if (remainder == 1)
+            {
+                split = $"{number - 3}/{number}, {number}/{number + 1}, {number}/{number + 3}";
+            }
+            else
+            {
+                    split = $"{number - 3}/{number}, {number - 1}/{number}, {number}/{number + 1}, {number}/{number + 3}";
+            }
 
-            string corner = "1/2/4/5";
 
+            string corner = "";
+            if (number == 0 || number == 37)
+            {
+                corner = $"{winningBin}";
+            }
+            else if (number < 4)
+            {
+                if (remainder == 0)
+                {
+                    corner = $"{number - 1}/{number}/{number + 2}/{number + 3}";
+                }
+                else if (remainder == 1)
+                {
+                    corner = $"{number}/{number + 1}/{number + 3}/{number + 4}";
+                }
+                else
+                {
+                    corner = $"{number - 1}/{number}/{number + 2}/{number + 3}, {number}/{number + 1}/{number + 3}/{number + 4}";
+                }
+            }
+            else if (number > 33)
+            {
+                if (remainder == 0)
+                {
+                    corner = $"{number - 4}/{number - 3}/{number - 1}/{number}";
+                }
+                else if (remainder == 1)
+                {
+                    corner = $"{number - 3}/{number - 2}/{number}/{number + 1}";
+                }
+                else
+                {
+                    corner = $"{number - 4}/{number - 3}/{number - 1}/ {number}, {number - 3}/{number - 2}/{number}/{number + 1}";
+                }
+            }
+            else if (remainder == 0)
+            {
+                corner = $"{number - 4}/{number -3}/{number - 1}/{number}, {number - 1}/{number}/{number + 2}/{number + 3}";
+            }
+            else if (remainder == 1)
+            {
+                corner = $"{number - 3}/{number - 2}/{number}/{number + 1}, {number}/{number + 1}/{number + 3}/{number + 4}";
+            }
+            else
+            {
+                corner = $"{number - 4}/{number - 3}/{number - 1}/ {number}, {number - 3}/{number - 2}/{number}/{number + 1}, {number -1}/{number}/{number + 2}/{number + 3}, {number}/{number + 1}/{number +3}/{number + 4}";
+            }
 
             Console.WriteLine($"\nWinning bin:\t{winningBin} {colors}");
             Console.WriteLine("-------------------------");
