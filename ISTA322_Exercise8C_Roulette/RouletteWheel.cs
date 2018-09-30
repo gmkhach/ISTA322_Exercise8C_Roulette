@@ -11,25 +11,28 @@ namespace ISTA322_Exercise8C_Roulette
         public RouletteWheel(int[] numbers)
         {
             string color;
-            for (int i= 0; i<38; i++)
+            for (int i = 0; i < 38; i++)
             {
-                color = "green";
-                if (((i < 11 || (i > 19 && i < 29)) && i % 2 == 0) || (((i > 10 && i < 20) || i > 28) && i % 2 == 1))
+                if (i == 0 || i == 37)
                 {
-                        color = "black";
+                    color = "green";
                 }
-                else 
+                else if (((i < 11 || (i > 19 && i < 29)) && i % 2 == 0) || (((i > 10 && i < 18) || i > 28) && i % 2 == 1))
+                {
+                    color = "black";
+                }
+                else
                 {
                     color = "red";
                 }
                 bins[i] = new Bin(numbers[i], color);
             }
         }
-        private Bin[] bins = new Bin[38]; 
+        private Bin[] bins = new Bin[38];
+        private Random rnd = new Random();
 
         public int Spin()
         {
-            Random rnd = new Random();
             return rnd.Next(38);
         }
     }
